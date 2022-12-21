@@ -58,7 +58,6 @@ exports.createProduct = (req,res)=>
            //handling the file here
 
            if(file.photo){
-              console.log("this is it"+file.photo.size);
               if(file.photo.size>3000000){
                  return res.status(400).json({
                     error : "File size too big"
@@ -72,7 +71,6 @@ exports.createProduct = (req,res)=>
            //saving to the database
 
            product.save((err,product)=>{
-              console.log(err);
                  if(err)
                  res.status(400).json({
                     error : "Saving Tshirt in DB failed"
@@ -142,7 +140,6 @@ exports.updateProduct = (req,res)=>
            //handling the file here
 
            if(file.photo){
-              console.log(file.photo.size);
               if(file.photo.size>3000000){
                  return res.status(400).json({
                     error : "File size too big"
@@ -156,8 +153,7 @@ exports.updateProduct = (req,res)=>
            //saving to the database
 
            product.save((err,product)=>{
-              console.log(err);
-                 if(err)
+                if(err)
                  res.status(400).json({
                     error : "Saving Tshirt in DB failed"
                  })
@@ -174,12 +170,7 @@ exports.getAllProducts = (req,res)=>{
    let no_of_products = req.query.limit? parseInt(req.query.limit):8;
    let sortBy = req.query.sortBy?req.query.sortBy : "price"
 
-    // req.query.limit ye wali jo cheez hai  
-   // ye request krenege tb jo question mark wala part hota hai url mein 
-   //wo hota hai query 
-   //agar query mein limit property hai to ye use kro warna 8 use kro 
-   //parse kiya kyunki ye string aayega aurmujheinteger chaiye 
-   console.log("inside this")
+   
    Product.find()
    .populate(
    {path:"catgeory",strictPopulate:false})
@@ -189,7 +180,6 @@ exports.getAllProducts = (req,res)=>{
    .exec((err,products)=>{
 
       if(err){
-        console.log(err);
         return res.status(400).json({
            error : "some error occured"
         })
@@ -201,7 +191,7 @@ exports.getAllProducts = (req,res)=>{
 }
 
 exports.updateStock = async (products)=>{
-   console.log("i am called")
+   
     let myOperations = products.map(prod =>{
        return {
           updateOne: {

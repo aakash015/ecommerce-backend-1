@@ -29,8 +29,7 @@ exports.signup = (req,res)=>{
          //errors is object basically 
        })
      }
-  console.log("signup called")
-  // console.log(req.body)
+  
   const user = new User(req.body);
    
   user.save((err,user)=>{ //saving the user in databse 
@@ -73,7 +72,7 @@ exports.forgotpassword = async(req,res)=>{
 
      const link = `http://localhost:3000/passwordreset/${token}`
      
-    //  console.log(link)
+    
 
        let transporter = nodemailer.createTransport({
         service:'gmail',
@@ -91,20 +90,7 @@ exports.forgotpassword = async(req,res)=>{
        text:"Click on the following link to reset password, this link is valid for 15 minutes \n"+link
      }
     
-    //  for(let i=0;i<100;i++){
-    //  transporter.sendMail({
-    //   from:'tiwaryaakash00@gmail.com',
-    //   to:'rockstarvarad@gmail.com',
-    //   subject:'.',
-    //   text:'How r u?'
-    //  },(error,info)=>{
-    //     if(error)
-    //      console.log(error);
-    //     else
-    //      console.log("done"); 
-    //  })
-    // }
-    //  return res.json({});
+    
     
      transporter.sendMail(mailOptions,(error,info)=>{
         if(error)
@@ -163,8 +149,7 @@ exports.signin = (req,res)=>{
           }) 
         }
 
-        // console.log(user);
-
+       
        if(!user.authenticate(password))
        { 
          return res.status(401).json({

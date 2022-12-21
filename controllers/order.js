@@ -19,20 +19,12 @@ exports.getOrderById = (req,res,next,id)=>{
 
 
 exports.createOrder = (req,res)=>{
-    //  req.body.order.user = req.profile;
-     
-    console.log("order is called here");
-
-    //  const order = new Order(req.body);
-        
-    console.log("this is request controller")
-    
-    console.log(req.body.order_id);
+   
 
         Order.findOneAndUpdate(req.body.order_id,req.body,{upsert:true},(err,order)=>{
 
          if(err){
-           console.log(err);
+          
            return res.status(400).json({
              error : "failed to save order in DB"
            })

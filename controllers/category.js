@@ -27,8 +27,6 @@ exports.createCategory = (req,res)=>{
           error:err
         })
        
-        console.log(category);
-        console.log({category});
         return res.json({category});
     })
 }
@@ -65,7 +63,6 @@ exports.updateCategory = (req,res)=>
             error : "Failed to update category"
           })
        }
-        console.log(updatedCategory);
        return res.json(updatedCategory);
    })
 }
@@ -73,8 +70,7 @@ exports.updateCategory = (req,res)=>
 exports.removeCategory = (req,res)=>{
     const category = req.category;
 
-    console.log(category);
-     
+    
     category.remove((err,category)=>{
          
       if(err)

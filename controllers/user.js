@@ -3,25 +3,20 @@ const Order = require('../models/order');
 
 exports.getUserById = (req,res,next,id)=>{
    User.findById(id).exec((err,user)=>{
-       //mongodb mein query execute krne ke liye ye use hota h
-       //ya to ye use kro ya iski jagah callback ka use kro ek hi baat h 
-       //findById(id,exec((err,user)=>{})) ye bhi theek h 
+       
       if(err || !user){
          return res.status(400).json({
            error : "No user was found in database"
          })
       }
       
-      // console.log("here")
        req.profile = user;
        next();
    })
 } 
 
 exports.getUser = (req,res)=>{
-  //TODO get back here for password
-
-  //isse ye properties hidden ho jaayengi user object mein
+  
    req.profile.salt = undefined; 
    req.profile.encry_password = undefined;
    req.profile.updatedAt = undefined;
@@ -30,21 +25,12 @@ exports.getUser = (req,res)=>{
    return res.json(req.profile)
 }
 
-// exports.getallusers = (req,res)=>{
-//    User.find().exec((err,user)=>{ assignment part 
-//       if(err || !user)
-//       return res.json({error : "No user found"})
-
-//       return res.json({...user})
-//    })
-// }
 
 exports.updateUser = (req,res)=>{
    User.findByIdAndUpdate(
       {_id : req.profile._id},
       {$set : req.body},
-      {new : true}, //this new true return updated object is we don't set 
-      //it to true then old object will be returned after updation
+      {new : true}, 
       (err,user)=>{
          if(err)
            return res.status(400).json({
@@ -81,8 +67,7 @@ exports.pushOrderInPurchaseList = (req,res,next)=>{
 
    req.body.products.forEach(product => {
 
-      console.log("here comes i");
-      console.log(product);
+     
       purchases.push({
          _id : product._id,
          name : product.name,
