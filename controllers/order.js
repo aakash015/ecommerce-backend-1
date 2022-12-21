@@ -45,7 +45,6 @@ exports.createOrder = (req,res)=>{
 
 exports.getAllOrders = (req,res) =>{
   Order.find()
-  .populate("user","_id name")
   .exec((err,order)=>{
 
       if(err)
@@ -57,6 +56,17 @@ exports.getAllOrders = (req,res) =>{
   })
 }
 
+exports.getOrderByUser = (req,res)=>{
+
+  const {_id} = req.body;
+
+  Order.find({user:_id},{products:1,address:1}).then((doc)=>{
+      return res.status(200).json(doc);
+  }).catch((error)=>{
+    return res.status(400).json(error);
+  })
+
+}
 
 exports.getOrderStatus = (req,res)=>{
        res.json(Order.schema.path("status").enumValues) //not much clear
