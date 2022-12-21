@@ -48,7 +48,8 @@ exports.paymentVerification = async(req,res)=>{
                     const data = await Order.findOneAndUpdate({orderid:razorpay_order_id},{payment:true},{new:true});
                     const final = await updateStock(data.products);
                     
-                    res.redirect(`https://yo-merchadise-backend.onrender.com/paymentsuccess?reference=${razorpay_order_id}`)
+                    console.log("hery fji")
+                    res.redirect(`http://localhost:3000/paymentsuccess?reference=${razorpay_order_id}`)
                     }
                     catch(err){
                     }
