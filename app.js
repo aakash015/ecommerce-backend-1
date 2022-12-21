@@ -64,7 +64,7 @@ app.use('/api',addressRoutes);
 
 //port 
 const port = process.env.PORT||3100
-mongoose.connect('mongodb://0.0.0.0:27017/tshirt')
+mongoose.connect('mongodb://0.0.0.0:27017/tshirt'||process.env.DATABASE)
 //process.env.DATABASE||
 //the reason to do this like process.env.DATABASE is because when we host the 
 //porject all sensitive information such as the path of the databse will be uplaoded 
