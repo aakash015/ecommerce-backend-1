@@ -48,7 +48,6 @@ exports.paymentVerification = async(req,res)=>{
                     const data = await Order.findOneAndUpdate({orderid:razorpay_order_id},{payment:true},{new:true});
                     const final = await updateStock(data.products);
                     
-                    // console.log("hery fji")
                     res.redirect(`https://ecommerce-frontend-1.vercel.app/paymentsuccess?reference=${razorpay_order_id}`)
                     }
                     catch(err){
