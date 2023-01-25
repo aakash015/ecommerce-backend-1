@@ -167,16 +167,14 @@ exports.updateProduct = (req,res)=>
 
 exports.getAllProducts = (req,res)=>{
 
-   let no_of_products = req.query.limit? parseInt(req.query.limit):8;
-   let sortBy = req.query.sortBy?req.query.sortBy : "price"
+   // let no_of_products = req.query.limit? parseInt(req.query.limit):8;
+   // let sortBy = req.query.sortBy?req.query.sortBy : "price"
 
    
    Product.find()
    .populate(
    {path:"catgeory",strictPopulate:false})
    .select("-photo")
-   .sort({sortBy:1})
-   .limit(no_of_products)
    .exec((err,products)=>{
 
       if(err){
