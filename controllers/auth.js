@@ -25,7 +25,7 @@ exports.signup = (req,res)=>{
     if(!errors.isEmpty())
      {
        return res.status(422).json({
-         error: errors.array()[0].msg //.array() converts everything in array 
+         err: errors.array()[0].msg //.array() converts everything in array 
          //errors is object basically 
        })
      }

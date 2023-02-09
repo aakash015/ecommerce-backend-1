@@ -41,7 +41,7 @@ app.use('/api',addressRoutes);
 
 
 const port = process.env.PORT||3100
-mongoose.connect(process.env.DATABASE)
+mongoose.connect("mongodb://0.0.0.0:27017/tshirt")
  //||"mongodb://0.0.0.0:27017/tshirt"
  //process.env.DATABASE
 .then(()=>{
